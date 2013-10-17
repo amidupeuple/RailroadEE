@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.10" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="2512ab3f-8a86-49ad-ba34-ae6d4eee7c62">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <synchronize>true</synchronize>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://localhost:3306/railroad</jdbc-url>
+    <user-name>root</user-name>
+    <user-password>dfd8dfc5dfc5dfde</user-password>
+    <schema-pattern>railroad.*</schema-pattern>
+    <default-schemas>railroad.*</default-schemas>
+    <libraries>
+      <library>
+        <url>jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar!/</url>
+      </library>
+    </libraries>
+    <schema name="" catalog="railroad"/>
+    <table name="passenger" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="first_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="second_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="date_of_birth" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_ticket_passenger" table="ticket" schema="" catalog="railroad" columns="passenger_id"/>
+    </table>
+    <table name="route" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_station_in_route_route" table="station_in_route" schema="" catalog="railroad" columns="route_id"/>
+    </table>
+    <table name="station" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" def="JzAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_station_in_route_station" table="station_in_route" schema="" catalog="railroad" columns="station_id"/>
+      <index name="name" unique="true" columns="name"/>
+    </table>
+    <table name="station_in_route" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="train_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="route_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="station_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="arrival_time" sqlType="TIME" length="8" precision="0" nullable="true" jdbcType="92"/>
+      <column name="departure_time" sqlType="TIME" length="8" precision="0" nullable="true" jdbcType="92"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_station_in_route_route" columns="route_id" ref-table="route" ref-schema="" ref-catalog="railroad" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_station_in_route_station" columns="station_id" ref-table="station" ref-schema="" ref-catalog="railroad" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_station_in_route_train" columns="train_id" ref-table="train" ref-schema="" ref-catalog="railroad" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="ticket" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="train_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="passenger_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_ticket_passenger" columns="passenger_id" ref-table="passenger" ref-schema="" ref-catalog="railroad" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="FK_ticket_train" columns="train_id" ref-table="train" ref-schema="" ref-catalog="railroad" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="train" schema="" catalog="railroad" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="number" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="vacancies" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_station_in_route_train" table="station_in_route" schema="" catalog="railroad" columns="train_id"/>
+      <exported-key name="FK_ticket_train" table="ticket" schema="" catalog="railroad" columns="train_id"/>
+      <index name="number" unique="true" columns="number"/>
+    </table>
+  </data-source>
+</component>
