@@ -1,3 +1,5 @@
+package services;
+
 import common.Constants;
 import dao.StationInRouteDAO;
 import dto.RequestDTO;
@@ -17,7 +19,7 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Stateless(name = "ScheduleEJB")
-public class ScheduleBean{
+public class ScheduleBean {
 
     @EJB
     StationInRouteDAO sirDAO;

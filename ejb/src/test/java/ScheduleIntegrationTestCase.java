@@ -1,6 +1,7 @@
 import junit.framework.TestCase;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import services.ScheduleBean;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
